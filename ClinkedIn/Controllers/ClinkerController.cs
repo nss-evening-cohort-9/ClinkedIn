@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ClinkedIn.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/clinkers")]
     [ApiController]
     public class ClinkerController : ControllerBase
     {
