@@ -17,7 +17,7 @@ namespace ClinkedIn.DataAccess
                 InmateNum = 137264,
                 FriendsList = new List<Guid>(),
                 EnemiesList =  new List<Guid>(),
-                Services = new List<Guid>(),
+                Services = new ServiceRepository().GetTwoRandomServiceIdList(),
                 Interests = new List<Guid>(),
             },
             new Clinker()
@@ -27,7 +27,7 @@ namespace ClinkedIn.DataAccess
                 InmateNum = 937463,
                 FriendsList = new List<Guid>(),
                 EnemiesList =  new List<Guid>(),
-                Services = new List<Guid>(),
+                Services = new ServiceRepository().GetTwoRandomServiceIdList(),
                 Interests = new List<Guid>(),
             },
             new Clinker()
@@ -85,12 +85,19 @@ namespace ClinkedIn.DataAccess
 
         public List<Guid> GetClinkerServiceIds()
         {
-            List<Guid> clinkerServices = new List<Guid>();
+            List<Guid> clinkerServiceIds = new List<Guid>();
             foreach (var clinker in _clinkers)
             {
-                clinkerServices.Union(clinker.FriendsList);
+                var serviceIds = clinker.Services;
+                foreach (var serviceId in serviceIds)
+                {
+                    if (!clinkerServiceIds.Contains(serviceId))
+                    {
+                        clinkerServiceIds.Add(serviceId);
+                    }
+                }
             }
-            return clinkerServices;
+            return clinkerServiceIds;
         }
 
         public List<Service> GetServicesByClinker(Guid clinkerId)

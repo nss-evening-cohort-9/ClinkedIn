@@ -8,7 +8,33 @@ namespace ClinkedIn.DataAccess
 {
     public class ServiceRepository
     {
-        static List<Service> _services = new List<Service>();
+        static List<Service> _services = new List<Service>()
+        {
+            new Service
+            {
+                Name = "service 1"
+            },
+            new Service
+            {
+                Name = "service 2"
+            },
+            new Service
+            {
+                Name = "service 3"
+            },
+            new Service
+            {
+                Name = "service 4"
+            },
+            new Service
+            {
+                Name = "service 5"
+            },
+            new Service
+            {
+                Name = "service 6"
+            }
+        };
 
         public Service GetById(Guid serviceId)
         {
@@ -24,6 +50,19 @@ namespace ClinkedIn.DataAccess
                 availableServices.Add(_services.First(service => service.Id == serviceId));
             }
             return availableServices;
+        }
+
+        public Service GetRandom()
+        {
+            Random random = new Random();
+            int randomIndex = random.Next(0, _services.Count);
+            Service randomService = _services[randomIndex];
+            return randomService;
+        }
+
+        public List<Guid> GetTwoRandomServiceIdList()
+        {
+            return new List<Guid> { GetRandom().Id, GetRandom().Id };
         }
     }
 }
