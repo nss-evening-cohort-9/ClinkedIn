@@ -11,5 +11,6 @@ namespace ClinkedIn.Controllers
     [ApiController]
     public class ClinkersController : ControllerBase
     {
+
     }
 }
