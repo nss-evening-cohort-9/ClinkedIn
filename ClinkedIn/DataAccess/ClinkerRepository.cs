@@ -83,5 +83,15 @@ namespace ClinkedIn.DataAccess
             return clinker;
         }
 
+        public List<Guid> GetClinkerServiceIds()
+        {
+            List<Guid> clinkerServices = new List<Guid>();
+            foreach (var clinker in _clinkers)
+            {
+                clinkerServices.Union(clinker.FriendsList);
+            }
+            return clinkerServices;
+        }
+
     }
 }
