@@ -9,6 +9,12 @@ namespace ClinkedIn.DataAccess
     public class ServiceRepository
     {
         static List<Service> _services = new List<Service>();
+
+        public Service GetById(Guid serviceId)
+        {
+            return _services.First(service => service.Id == serviceId);
+        }
+
         public List<Service> GetAllAvailableServices()
         {
             var clinkerServiceIds = new ClinkerRepository().GetClinkerServiceIds();

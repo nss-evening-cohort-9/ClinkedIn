@@ -93,5 +93,19 @@ namespace ClinkedIn.DataAccess
             return clinkerServices;
         }
 
+        public List<Service> GetServicesByClinker(Guid clinkerId)
+        {
+            var requestedClinker = _clinkers.First(clinker => clinker.Id == clinkerId);
+            var clinkerServiceIds = requestedClinker.Services;
+            var clinkerServices = new List<Service>();
+
+            foreach (var serviceId in clinkerServiceIds)
+            {
+                var clinkerService = new ServiceRepository().GetById(serviceId);
+                clinkerServices.Add(clinkerService);
+            }
+
+            return clinkerServices;
+        }
     }
 }
