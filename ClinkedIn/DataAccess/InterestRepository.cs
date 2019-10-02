@@ -37,6 +37,11 @@ namespace ClinkedIn.DataAccess
             }
         };
 
+        public List<Interest> GetAll()
+        {
+            return _interest;
+        }
+
         public Interest GetById(Guid id)
         {
             var interest = _interest.First(i => i.Id == id);

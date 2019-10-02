@@ -95,6 +95,15 @@ namespace ClinkedIn.DataAccess
             return clinkerToUpdate;
         }
 
+        public Clinker UpdateService(Guid clinkerId, Guid serviceId)
+        {
+            var clinkerToUpdate = _clinkers.First(clinker => clinker.Id == clinkerId);
+
+            clinkerToUpdate.Services.Add(serviceId);
+
+            return clinkerToUpdate;
+        }
+
 
         public List<Guid> GetClinkerServiceIds()
         {

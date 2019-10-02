@@ -21,26 +21,11 @@ namespace ClinkedIn.Controllers
             return repo.GetAll();
         }
 
-        [HttpPut("{clinkerId}/addInterest/{interestId}")]
-        public IActionResult UpdateClinkerInterest(Guid clinkerId, Guid interestId)
+        [HttpGet("interests")]
+        public ActionResult<IEnumerable<Interest>> GetAllServices()
         {
-            var repo = new ClinkerRepository();
-
-            var clinkerThatGotUpdated = repo.UpdateInterest(clinkerId, interestId);
-
-            // var outputist = new List<MyNewTpeOfClinkerDTO>();
-            foreach (var i in clinkerThatGotUpdated.Interests)
-            {
-
-            }
-
-            var interestRepo = new InterestRepository();
-
-            var addedInterest = interestRepo.GetById(interestId);
-
-            //addedInterest.Name;
-
-            return Ok(clinkerThatGotUpdated);
+            var repo = new InterestRepository();
+            return repo.GetAll();
         }
 
         // GET api/clinkers/services
@@ -55,6 +40,28 @@ namespace ClinkedIn.Controllers
         public ActionResult<IEnumerable<Service>> GetServicesByClinkerId(Guid clinkerId)
         {
             return new ClinkerRepository().GetServicesByClinker(clinkerId);
+        }
+
+
+        [HttpPut("{clinkerId}/interests/{interestId}")]
+        public IActionResult UpdateClinkerInterest(Guid clinkerId, Guid interestId)
+        {
+            var repo = new ClinkerRepository();
+
+            var clinkerThatGotUpdated = repo.UpdateInterest(clinkerId, interestId);
+
+            return Ok(clinkerThatGotUpdated);
+        }
+
+
+        [HttpPut("{clinkerId}/services/{serviceId}")]
+        public IActionResult UpdateClinkerService(Guid clinkerId, Guid serviceId)
+        {
+            var repo = new ClinkerRepository();
+
+            var clinkerThatGotUpdated = repo.UpdateService(clinkerId, serviceId);
+
+            return Ok(clinkerThatGotUpdated);
         }
     }
 }
