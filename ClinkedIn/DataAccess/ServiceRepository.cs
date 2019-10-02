@@ -12,27 +12,66 @@ namespace ClinkedIn.DataAccess
         {
             new Service
             {
-                Name = "service 1"
+                Id = Guid.NewGuid(),
+                Name = "Religion",
+                Description = "A service for inmates to practice their religion.",
+                Cost = 30
             },
             new Service
             {
-                Name = "service 2"
+                Id = Guid.NewGuid(),
+                Name = "Drug and Alcohol Prevention",
+                Description = "A service to help prevent inmates from drug and alcohol abuse.",
+                Cost = 10
             },
             new Service
             {
-                Name = "service 3"
+                Id = Guid.NewGuid(),
+                Name = "Education",
+                Description = "A service to help educate inmates.",
+                Cost = 20
             },
             new Service
             {
-                Name = "service 4"
+                Id = Guid.NewGuid(),
+                Name = "service 1",
+                Description = "service 1 is dope",
+                Cost = 10
             },
             new Service
             {
-                Name = "service 5"
+                Id = Guid.NewGuid(),
+                Name = "service 2",
+                Description = "service 2 is dope",
+                Cost = 20
             },
             new Service
             {
-                Name = "service 6"
+                Id = Guid.NewGuid(),
+                Name = "service 3",
+                Description = "service 3 is dope",
+                Cost = 30
+            },
+            new Service
+            {
+                Id = Guid.NewGuid(),
+                Name = "service 4",
+                Description = "service 4 is dope",
+                Cost = 40
+            },
+            new Service
+            {
+                Id = Guid.NewGuid(),
+                Name = "service 5",
+                Description = "service 5 is dope",
+                Cost = 50
+            },
+            new Service
+            {
+                Id = Guid.NewGuid(),
+                Name = "service 6",
+                Description = "service 6 is dope",
+                Cost = 60
             }
         };
 
