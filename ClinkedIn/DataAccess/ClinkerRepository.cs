@@ -19,6 +19,7 @@ namespace ClinkedIn.DataAccess
                 EnemiesList =  new List<Guid>(),
                 Services = new List<Guid>(),
                 Interests = new List<Guid>(),
+
             },
             new Clinker()
             {
@@ -81,6 +82,15 @@ namespace ClinkedIn.DataAccess
         {
             var clinker = _clinkers.First(x => x.Id == id);
             return clinker;
+        }
+
+        public Clinker UpdateInterest(Clinker updatedClinker, Guid id)
+        {
+            var clinkerToUpdate = _clinkers.First(clinker => clinker.Id == id);
+
+            clinkerToUpdate.Interests = updatedClinker.Interests;
+
+            return clinkerToUpdate;
         }
 
     }
