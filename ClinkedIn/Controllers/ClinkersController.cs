@@ -28,7 +28,7 @@ namespace ClinkedIn.Controllers
 
             var clinkerThatGotUpdated = repo.UpdateInterest(clinkerId, interestId);
 
-           // var outputist = new List<MyNewTpeOfClinkerDTO>();
+            // var outputist = new List<MyNewTpeOfClinkerDTO>();
             foreach (var i in clinkerThatGotUpdated.Interests)
             {
 
@@ -38,10 +38,23 @@ namespace ClinkedIn.Controllers
 
             var addedInterest = interestRepo.GetById(interestId);
 
-            addedInterest.Name;
+            //addedInterest.Name;
 
             return Ok(clinkerThatGotUpdated);
         }
 
+        // GET api/clinkers/services
+        [HttpGet("services")]
+        public ActionResult<IEnumerable<Service>> GetAvailableServices()
+        {
+            return new ServiceRepository().GetAllAvailableServices();
+        }
+
+        // GET api/clinkers/clinkerId/services
+        [HttpGet("{clinkerId}/services")]
+        public ActionResult<IEnumerable<Service>> GetServicesByClinkerId(Guid clinkerId)
+        {
+            return new ClinkerRepository().GetServicesByClinker(clinkerId);
+        }
     }
 }
