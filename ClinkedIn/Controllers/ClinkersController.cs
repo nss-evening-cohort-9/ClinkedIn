@@ -20,10 +20,11 @@ namespace ClinkedIn.Controllers
             return new ServiceRepository().GetAllAvailableServices();
         }
 
+        // GET api/clinkers/clinkerId/services
         [HttpGet("{clinkerId}/services")]
-        public ActionResult<IEnumerable<Service>> GetServicesByClinkerId(Guid id)
+        public ActionResult<IEnumerable<Service>> GetServicesByClinkerId(Guid clinkerId)
         {
-            throw new NotImplementedException();
+            return new ClinkerRepository().GetServicesByClinker(clinkerId);
         }
     }
 }
