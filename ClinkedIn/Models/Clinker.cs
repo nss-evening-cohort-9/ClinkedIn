@@ -14,6 +14,5 @@ namespace ClinkedIn.Models
         public List<Guid> EnemiesList { get; set; }
         public List<Guid> Services { get; set; }
         public List<Guid> Interests { get; set; }
-
     }
 }
