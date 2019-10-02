@@ -18,7 +18,7 @@ namespace ClinkedIn.DataAccess
                 FriendsList = new List<Guid>(),
                 EnemiesList =  new List<Guid>(),
                 Services = new ServiceRepository().GetTwoRandomServiceIdList(),
-                Interests = new List<Guid>(),
+                Interests = new InterestRepository().GetRandomInterests(),
             },
             new Clinker()
             {
@@ -28,7 +28,7 @@ namespace ClinkedIn.DataAccess
                 FriendsList = new List<Guid>(),
                 EnemiesList =  new List<Guid>(),
                 Services = new ServiceRepository().GetTwoRandomServiceIdList(),
-                Interests = new List<Guid>(),
+                Interests = new InterestRepository().GetRandomInterests(),
             },
             new Clinker()
             {
@@ -100,6 +100,21 @@ namespace ClinkedIn.DataAccess
                 }
             }
             return clinkerServiceIds;
+        }
+
+        public List<Clinker> GetClinkersByInterest(Guid interestId)
+        {
+            List<Clinker> filteredClinkers = new List<Clinker>();
+
+            foreach (Clinker clinker in _clinkers)
+            {
+                if (clinker.Interests.Contains(interestId))
+                {
+                    filteredClinkers.Add(clinker);
+                }
+            }
+
+            return filteredClinkers;
         }
 
         public List<Service> GetServicesByClinker(Guid clinkerId)
