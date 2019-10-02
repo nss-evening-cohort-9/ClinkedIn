@@ -84,11 +84,11 @@ namespace ClinkedIn.DataAccess
             return clinker;
         }
 
-        public Clinker UpdateInterest(Clinker updatedClinker, Guid id)
+        public Clinker UpdateInterest(Guid clinkerId, Guid interestId)
         {
-            var clinkerToUpdate = _clinkers.First(clinker => clinker.Id == id);
+            var clinkerToUpdate = _clinkers.First(clinker => clinker.Id == clinkerId);
 
-            clinkerToUpdate.Interests = updatedClinker.Interests;
+            clinkerToUpdate.Interests.Add(interestId);
 
             return clinkerToUpdate;
         }

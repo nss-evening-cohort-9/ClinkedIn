@@ -21,17 +21,24 @@ namespace ClinkedIn.Controllers
             return repo.GetAll();
         }
 
-        [HttpPut("{id}")]
-        public IActionResult UpdateClinker(UpdateClinkerCommand updatedClinkerCommand, Guid id)
+        [HttpPut("{clinkerId}/addInterest/{interestId}")]
+        public IActionResult UpdateClinkerInterest(Guid clinkerId, Guid interestId)
         {
             var repo = new ClinkerRepository();
 
-            var updatedClinker = new Clinker
+            var clinkerThatGotUpdated = repo.UpdateInterest(clinkerId, interestId);
+
+           // var outputist = new List<MyNewTpeOfClinkerDTO>();
+            foreach (var i in clinkerThatGotUpdated.Interests)
             {
-                Name = updatedClinkerCommand.Name,
-                Interests = updatedClinkerCommand.Interests,
-            };
-            var clinkerThatGotUpdated = repo.UpdateInterest(updatedClinker, id);
+
+            }
+
+            var interestRepo = new InterestRepository();
+
+            var addedInterest = interestRepo.GetById(interestId);
+
+            addedInterest.Name;
 
             return Ok(clinkerThatGotUpdated);
         }
