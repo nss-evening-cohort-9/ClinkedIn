@@ -79,7 +79,9 @@ namespace ClinkedIn.DataAccess
 
         public Clinker GetById(Guid id)
         {
-            var clinker = _clinkers.First(x => x.Id == id);
+            var clinker = _clinkers.FirstOrDefault(x => x.Id == id);
+
+            if (clinker == null) return null;
             return clinker;
         }
 
@@ -102,7 +104,10 @@ namespace ClinkedIn.DataAccess
 
         public List<Service> GetServicesByClinker(Guid clinkerId)
         {
-            var requestedClinker = _clinkers.First(clinker => clinker.Id == clinkerId);
+            var requestedClinker = _clinkers.FirstOrDefault(clinker => clinker.Id == clinkerId);
+
+            if (requestedClinker == null) return null;
+
             var clinkerServiceIds = requestedClinker.Services;
             var clinkerServices = new List<Service>();
 
