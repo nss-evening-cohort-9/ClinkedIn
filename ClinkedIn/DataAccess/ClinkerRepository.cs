@@ -17,7 +17,7 @@ namespace ClinkedIn.DataAccess
                 InmateNum = 137264,
                 FriendsList = new List<Guid>(),
                 EnemiesList =  new List<Guid>(),
-                Services = new List<Guid>(),
+                Services = new ServiceRepository().GetTwoRandomServiceIdList(),
                 Interests = new List<Guid>(),
             },
             new Clinker()
@@ -27,7 +27,7 @@ namespace ClinkedIn.DataAccess
                 InmateNum = 937463,
                 FriendsList = new List<Guid>(),
                 EnemiesList =  new List<Guid>(),
-                Services = new List<Guid>(),
+                Services = new ServiceRepository().GetTwoRandomServiceIdList(),
                 Interests = new List<Guid>(),
             },
             new Clinker()
@@ -79,9 +79,45 @@ namespace ClinkedIn.DataAccess
 
         public Clinker GetById(Guid id)
         {
-            var clinker = _clinkers.First(x => x.Id == id);
+            var clinker = _clinkers.FirstOrDefault(x => x.Id == id);
+
+            if (clinker == null) return null;
             return clinker;
         }
 
+        public List<Guid> GetClinkerServiceIds()
+        {
+            List<Guid> clinkerServiceIds = new List<Guid>();
+            foreach (var clinker in _clinkers)
+            {
+                var serviceIds = clinker.Services;
+                foreach (var serviceId in serviceIds)
+                {
+                    if (!clinkerServiceIds.Contains(serviceId))
+                    {
+                        clinkerServiceIds.Add(serviceId);
+                    }
+                }
+            }
+            return clinkerServiceIds;
+        }
+
+        public List<Service> GetServicesByClinker(Guid clinkerId)
+        {
+            var requestedClinker = _clinkers.FirstOrDefault(clinker => clinker.Id == clinkerId);
+
+            if (requestedClinker == null) return null;
+
+            var clinkerServiceIds = requestedClinker.Services;
+            var clinkerServices = new List<Service>();
+
+            foreach (var serviceId in clinkerServiceIds)
+            {
+                var clinkerService = new ServiceRepository().GetById(serviceId);
+                clinkerServices.Add(clinkerService);
+            }
+
+            return clinkerServices;
+        }
     }
 }
