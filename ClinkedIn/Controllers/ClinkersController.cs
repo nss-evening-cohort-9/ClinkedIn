@@ -42,6 +42,21 @@ namespace ClinkedIn.Controllers
             return new ClinkerRepository().GetServicesByClinker(clinkerId);
         }
 
+        // GET api/clinkers/interests
+        [HttpGet("interests")]
+        public ActionResult<IEnumerable<Interest>> GetRepresentedInterests()
+        {
+            return new InterestRepository().GetAllRepresentedInterests();
+        }
+
+        // GET api/clinkers/interests/interestId
+        [HttpGet("interests/{interestId}")]
+        public ActionResult<IEnumerable<Clinker>> GetClinkersByInterest(Guid interestId)
+        {
+            return new ClinkerRepository().GetClinkersByInterest(interestId);
+        }
+
+
         // api/clinkers/clinkerid/interests/interestid
         [HttpPut("{clinkerId}/interests/{interestId}")]
         public IActionResult UpdateClinkerInterest(Guid clinkerId, Guid interestId)
