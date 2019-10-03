@@ -187,5 +187,40 @@ namespace ClinkedIn.DataAccess
 
             return clinkerToUpdate;
         }
+
+        public void DeleteClinker(Guid clinkerId)
+        {
+            var clinkerToDelete = _clinkers.First(clinker => clinker.Id == clinkerId);
+
+            _clinkers.Remove(clinkerToDelete);
+        }
+
+        public void RemoveServiceFromServiceList(Guid clinkerId, Guid serviceId)
+        {
+            var clinkerToUpdate = _clinkers.First(clinker => clinker.Id == clinkerId);
+
+            clinkerToUpdate.Services.Remove(serviceId);
+        }
+
+        public void RemoveInterestFromInterestList(Guid clinkerId, Guid interestId)
+        {
+            var clinkerToUpdate = _clinkers.First(clinker => clinker.Id == clinkerId);
+
+            clinkerToUpdate.Interests.Remove(interestId);
+        }
+
+        public void RemoveFriendFromFriendList(Guid clinkerId, Guid friendId)
+        {
+            var clinkerToUpdate = _clinkers.First(clinker => clinker.Id == clinkerId);
+
+            clinkerToUpdate.FriendsList.Remove(friendId);
+        }
+
+        public void RemoveEnemyFromEnemyList(Guid clinkerId, Guid enemyId)
+        {
+            var clinkerToUpdate = _clinkers.First(clinker => clinker.Id == clinkerId);
+
+            clinkerToUpdate.EnemiesList.Remove(enemyId);
+        }
     }
 }

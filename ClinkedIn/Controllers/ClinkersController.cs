@@ -21,13 +21,6 @@ namespace ClinkedIn.Controllers
             return repo.GetAll();
         }
 
-        [HttpGet("interests")]
-        public ActionResult<IEnumerable<Interest>> GetAllServices()
-        {
-            var repo = new InterestRepository();
-            return repo.GetAll();
-        }
-
         // GET api/clinkers/services
         [HttpGet("services")]
         public ActionResult<IEnumerable<Service>> GetAvailableServices()
@@ -40,6 +33,13 @@ namespace ClinkedIn.Controllers
         public ActionResult<IEnumerable<Service>> GetServicesByClinkerId(Guid clinkerId)
         {
             return new ClinkerRepository().GetServicesByClinker(clinkerId);
+        }
+
+        [HttpGet("interests/all")]
+        public ActionResult<IEnumerable<Interest>> GetAllInterests()
+        {
+            var repo = new InterestRepository();
+            return repo.GetAll();
         }
 
         // GET api/clinkers/interests
@@ -102,6 +102,54 @@ namespace ClinkedIn.Controllers
             var clinkerThatGotUpdated = repo.AddEnemy(clinkerId, enemyId);
 
             return Ok(clinkerThatGotUpdated);
+        }
+
+
+        [HttpDelete("{clinkerId}")]
+        public IActionResult DeleteClinker(Guid clinkerId)
+        {
+            var repo = new ClinkerRepository();
+            repo.DeleteClinker(clinkerId);
+
+            return Ok();
+        }
+
+
+        [HttpDelete("{clinkerId}/services/{serviceId}")]
+        public IActionResult RemoveServiceFromServiceList(Guid clinkerId, Guid serviceId)
+        {
+            var repo = new ClinkerRepository();
+            repo.RemoveServiceFromServiceList(clinkerId, serviceId);
+
+            return Ok();
+        }
+
+        [HttpDelete("{clinkerId}/interests/{interestId}")]
+        public IActionResult RemoveInterestFromInterestList(Guid clinkerId, Guid interestId)
+        {
+            var repo = new ClinkerRepository();
+            repo.RemoveInterestFromInterestList(clinkerId, interestId);
+
+            return Ok();
+        }
+
+
+        [HttpDelete("{clinkerId}/friends/{friendId}")]
+        public IActionResult RemoveFriendFromFriendList(Guid clinkerId, Guid friendId)
+        {
+            var repo = new ClinkerRepository();
+            repo.RemoveFriendFromFriendList(clinkerId, friendId);
+
+            return Ok();
+        }
+
+        [HttpDelete("{clinkerId}/enemies/{enemyId}")]
+        public IActionResult RemoveEnemyFromEnemyList(Guid clinkerId, Guid enemyId)
+        {
+            var repo = new ClinkerRepository();
+            repo.RemoveEnemyFromEnemyList(clinkerId, enemyId);
+
+            return Ok();
         }
     }
 }
