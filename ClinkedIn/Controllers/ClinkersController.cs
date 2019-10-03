@@ -84,7 +84,7 @@ namespace ClinkedIn.Controllers
         {
             var repo = new ClinkerRepository();
 
-            var clinkerThatGotUpdated = repo.AddFriend(clinkerId, enemyId);
+            var clinkerThatGotUpdated = repo.AddEnemy(clinkerId, enemyId);
 
             return Ok(clinkerThatGotUpdated);
         }

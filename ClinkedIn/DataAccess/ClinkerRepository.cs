@@ -152,7 +152,7 @@ namespace ClinkedIn.DataAccess
         {
             var clinkerToUpdate = _clinkers.First(clinker => clinker.Id == clinkerId);
 
-            clinkerToUpdate.FriendsList.Add(enemyId);
+            clinkerToUpdate.EnemiesList.Add(enemyId);
 
             return clinkerToUpdate;
         }
