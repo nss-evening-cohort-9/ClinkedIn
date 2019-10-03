@@ -42,24 +42,49 @@ namespace ClinkedIn.Controllers
             return new ClinkerRepository().GetServicesByClinker(clinkerId);
         }
 
-
+        // api/clinkers/clinkerid/interests/interestid
         [HttpPut("{clinkerId}/interests/{interestId}")]
         public IActionResult UpdateClinkerInterest(Guid clinkerId, Guid interestId)
         {
             var repo = new ClinkerRepository();
 
-            var clinkerThatGotUpdated = repo.UpdateInterest(clinkerId, interestId);
+            var clinkerThatGotUpdated = repo.AddInterest(clinkerId, interestId);
 
             return Ok(clinkerThatGotUpdated);
         }
 
 
+        // api/clinkers/{clinkerGUID}/services/{serviceGUID}
         [HttpPut("{clinkerId}/services/{serviceId}")]
         public IActionResult UpdateClinkerService(Guid clinkerId, Guid serviceId)
         {
             var repo = new ClinkerRepository();
 
-            var clinkerThatGotUpdated = repo.UpdateService(clinkerId, serviceId);
+            var clinkerThatGotUpdated = repo.AddService(clinkerId, serviceId);
+
+            return Ok(clinkerThatGotUpdated);
+        }
+
+
+        // api/clinkers/{clinkerGUID}/friends/{friendGUID}
+        [HttpPut("{clinkerId}/friends/{friendId}")]
+        public IActionResult UpdateClinkerFriend(Guid clinkerId, Guid friendId)
+        {
+            var repo = new ClinkerRepository();
+
+            var clinkerThatGotUpdated = repo.AddFriend(clinkerId, friendId);
+
+            return Ok(clinkerThatGotUpdated);
+        }
+
+
+        // api/clinkers/{clinkerGUID}/enemy/{enemyGUID}
+        [HttpPut("{clinkerId}/enemies/{enemyId}")]
+        public IActionResult UpdateClinkerEnemy(Guid clinkerId, Guid enemyId)
+        {
+            var repo = new ClinkerRepository();
+
+            var clinkerThatGotUpdated = repo.AddFriend(clinkerId, enemyId);
 
             return Ok(clinkerThatGotUpdated);
         }

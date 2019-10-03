@@ -86,25 +86,6 @@ namespace ClinkedIn.DataAccess
             return clinker;
         }
 
-        public Clinker UpdateInterest(Guid clinkerId, Guid interestId)
-        {
-            var clinkerToUpdate = _clinkers.First(clinker => clinker.Id == clinkerId);
-
-            clinkerToUpdate.Interests.Add(interestId);
-
-            return clinkerToUpdate;
-        }
-
-        public Clinker UpdateService(Guid clinkerId, Guid serviceId)
-        {
-            var clinkerToUpdate = _clinkers.First(clinker => clinker.Id == clinkerId);
-
-            clinkerToUpdate.Services.Add(serviceId);
-
-            return clinkerToUpdate;
-        }
-
-
         public List<Guid> GetClinkerServiceIds()
         {
             List<Guid> clinkerServiceIds = new List<Guid>();
@@ -138,6 +119,42 @@ namespace ClinkedIn.DataAccess
             }
 
             return clinkerServices;
+        }
+
+        public Clinker AddInterest(Guid clinkerId, Guid interestId)
+        {
+            var clinkerToUpdate = _clinkers.First(clinker => clinker.Id == clinkerId);
+
+            clinkerToUpdate.Interests.Add(interestId);
+
+            return clinkerToUpdate;
+        }
+
+        public Clinker AddService(Guid clinkerId, Guid serviceId)
+        {
+            var clinkerToUpdate = _clinkers.First(clinker => clinker.Id == clinkerId);
+
+            clinkerToUpdate.Services.Add(serviceId);
+
+            return clinkerToUpdate;
+        }
+
+        public Clinker AddFriend(Guid clinkerId, Guid friendId)
+        {
+            var clinkerToUpdate = _clinkers.First(clinker => clinker.Id == clinkerId);
+
+            clinkerToUpdate.FriendsList.Add(friendId);
+
+            return clinkerToUpdate;
+        }
+
+        public Clinker AddEnemy(Guid clinkerId, Guid enemyId)
+        {
+            var clinkerToUpdate = _clinkers.First(clinker => clinker.Id == clinkerId);
+
+            clinkerToUpdate.FriendsList.Add(enemyId);
+
+            return clinkerToUpdate;
         }
     }
 }
