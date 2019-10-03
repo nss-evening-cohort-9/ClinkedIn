@@ -37,6 +37,17 @@ namespace ClinkedIn.DataAccess
             }
         };
 
+        public List<Interest> GetAllRepresentedInterests()
+        {
+            List<Guid> clinkerInterestIds = new ClinkerRepository().GetClinkerInterestIds();
+            List<Interest> availableInterests = new List<Interest>();
+            foreach (Guid interestId in clinkerInterestIds)
+            {
+                availableInterests.Add(_interest.First(interest => interest.Id == interestId));
+            }
+            return availableInterests;
+        }
+
         public Interest GetById(Guid id)
         {
             var interest = _interest.First(i => i.Id == id);
