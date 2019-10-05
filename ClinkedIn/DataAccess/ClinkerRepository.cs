@@ -10,20 +10,25 @@ namespace ClinkedIn.DataAccess
     {
         public ClinkerRepository()
         {
-            _clinkers = new List<Clinker> {
-                new Clinker("Scuba Steve", 137264),
-                new Clinker("Bubba", 937463),
-                new Clinker("Mad Cow", 947635),
-                new Clinker("Capone", 229574),
-                new Clinker("Stitch The Snitch", 756994),
-                new Clinker("Nasty Nate", 666666),
-                new Clinker("Dirty Dan", 77777)
-            };
+            if (_isFirstInstantiation)
+            {
+                _clinkers = new List<Clinker> {
+                    new Clinker("Scuba Steve", 137264),
+                    new Clinker("Bubba", 937463),
+                    new Clinker("Mad Cow", 947635),
+                    new Clinker("Capone", 229574),
+                    new Clinker("Stitch The Snitch", 756994),
+                    new Clinker("Nasty Nate", 666666),
+                    new Clinker("Dirty Dan", 77777)
+                };
 
-            AssignRandomRelationships();
+                AssignRandomRelationships();
+                _isFirstInstantiation = false;
+            }
         }
 
         static List<Clinker> _clinkers;
+        static bool _isFirstInstantiation = true;
 
         public List<Clinker> GetAll()
         {
@@ -125,6 +130,12 @@ namespace ClinkedIn.DataAccess
                 clinker.FriendsList = GetRandomClinkers();
                 clinker.EnemiesList = GetRandomClinkers();
             }
+        }
+
+        public Clinker Add(Clinker newClinker)
+        {
+            _clinkers.Add(newClinker);
+            return newClinker;
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ClinkedIn.DataAccess;
+using ClinkedIn.Command;
 using ClinkedIn.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -46,6 +47,25 @@ namespace ClinkedIn.Controllers
         public ActionResult<IEnumerable<Clinker>> GetClinkersByInterest(Guid interestId)
         {
             return new ClinkerRepository().GetClinkersByInterest(interestId);
+        }
+
+        // POST api/clinkers
+        [HttpPost]
+        public IActionResult CreateClinker(NewClinkerCommand newClinkerCommand)
+        {
+            Clinker newClinker = new Clinker(newClinkerCommand.Name, newClinkerCommand.InmateNum);
+
+            ClinkerRepository repo = new ClinkerRepository();
+            var clinkerThatGotCreated = repo.Add(newClinker);
+
+            return Created($"api/clinkers/{clinkerThatGotCreated.Id}", clinkerThatGotCreated);
+        }
+
+        // GET api/clinkers/clinkerId
+        [HttpGet("{clinkerId}")]
+        public ActionResult<Clinker> GetClinkerById(Guid clinkerId)
+        {
+            return new ClinkerRepository().GetById(clinkerId);
         }
     }
 }

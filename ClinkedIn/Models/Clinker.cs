@@ -11,8 +11,8 @@ namespace ClinkedIn.Models
         public Guid Id { get; }
         public string Name { get; set; }
         public int InmateNum { get; set; }
-        public List<Guid> FriendsList { get; set; }
-        public List<Guid> EnemiesList { get; set; }
+        public List<Guid> FriendsList { get; set; } = new List<Guid>();
+        public List<Guid> EnemiesList { get; set; } = new List<Guid>();
         public List<Guid> Services { get; set; } = new ServiceRepository().GetRandomServices();
         public List<Guid> Interests { get; set; } = new InterestRepository().GetRandomInterests();
 
