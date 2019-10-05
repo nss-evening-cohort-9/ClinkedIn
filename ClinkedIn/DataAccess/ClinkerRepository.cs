@@ -8,68 +8,15 @@ namespace ClinkedIn.DataAccess
 {
     public class ClinkerRepository
     {
-        private static List<Clinker> _clinkers = new List<Clinker>
+        static List<Clinker> _clinkers = new List<Clinker>
         {
-            new Clinker()
-            {
-                Id = Guid.NewGuid(),
-                Name = "Scuba Steve",
-                InmateNum = 137264,
-                FriendsList = new List<Guid>(),
-                EnemiesList =  new List<Guid>(),
-                Services = new ServiceRepository().GetTwoRandomServiceIdList(),
-                Interests = new InterestRepository().GetRandomInterests(),
-            },
-            new Clinker()
-            {
-                Id = Guid.NewGuid(),
-                Name = "Bubba",
-                InmateNum = 937463,
-                FriendsList = new List<Guid>(),
-                EnemiesList =  new List<Guid>(),
-                Services = new ServiceRepository().GetTwoRandomServiceIdList(),
-                Interests = new InterestRepository().GetRandomInterests(),
-            },
-            new Clinker()
-            {
-                Id = Guid.NewGuid(),
-                Name = "Mad Cow",
-                InmateNum = 947635,
-                FriendsList = new List<Guid>(),
-                EnemiesList =  new List<Guid>(),
-                Services = new List<Guid>(),
-                Interests = new List<Guid>(),
-            },
-            new Clinker()
-            {
-                Id = Guid.NewGuid(),
-                Name = "Capone",
-                InmateNum = 229574,
-                FriendsList = new List<Guid>(),
-                EnemiesList =  new List<Guid>(),
-                Services = new List<Guid>(),
-                Interests = new List<Guid>(),
-            },
-            new Clinker()
-            {
-                Id = Guid.NewGuid(),
-                Name = "Stitch The Snitch",
-                InmateNum = 756994,
-                FriendsList = new List<Guid>(),
-                EnemiesList =  new List<Guid>(),
-                Services = new List<Guid>(),
-                Interests = new List<Guid>(),
-            },
-            new Clinker()
-            {
-                Id = Guid.NewGuid(),
-                Name = "Nasty Nate",
-                InmateNum = 666666,
-                FriendsList = new List<Guid>(),
-                EnemiesList =  new List<Guid>(),
-                Services = new List<Guid>(),
-                Interests = new List<Guid>(),
-            },
+            new Clinker("Scuba Steve", 137264),
+            new Clinker("Bubba", 937463),
+            new Clinker("Mad Cow", 947635),
+            new Clinker("Capone", 229574),
+            new Clinker("Stitch The Snitch", 756994),
+            new Clinker("Nasty Nate", 666666),
+            new Clinker("Dirty Dan", 77777)
         };
 
         public List<Clinker> GetAll()
@@ -150,6 +97,19 @@ namespace ClinkedIn.DataAccess
             }
 
             return clinkerServices;
+        }
+
+        public Clinker GetRandom()
+        {
+            Random random = new Random();
+            int randomIndex = random.Next(0, _clinkers.Count);
+            Clinker randomService = _clinkers[randomIndex];
+            return randomService;
+        }
+
+        public List<Guid> GetRandomClinkers()
+        {
+            return new List<Guid> { GetRandom().Id, GetRandom().Id };
         }
     }
 }
