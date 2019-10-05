@@ -151,5 +151,11 @@ namespace ClinkedIn.DataAccess
 
             return clinkerServices;
         }
+
+        public Clinker Add(Clinker newClinker)
+        {
+            _clinkers.Add(newClinker);
+            return newClinker;
+        }
     }
 }
