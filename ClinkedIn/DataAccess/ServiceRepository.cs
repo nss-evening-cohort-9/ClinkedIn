@@ -22,7 +22,8 @@ namespace ClinkedIn.DataAccess
 
         public List<Service> GetAllAvailableServices()
         {
-            var clinkerServiceIds = new ClinkerRepository().GetClinkerServiceIds();
+            var clinkerRepo = new ClinkerRepository();
+            var clinkerServiceIds = clinkerRepo.GetClinkerServiceIds();
             var availableServices = new List<Service>();
             foreach (var serviceId in clinkerServiceIds)
             {
