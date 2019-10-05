@@ -31,6 +31,5 @@ namespace ClinkedIn.Models
             _guidPart = guidPart.ToString("X");
             return $"80000017-0000-fb00-{_guidPart}-84710c7967bb";
         }
-
     }
 }

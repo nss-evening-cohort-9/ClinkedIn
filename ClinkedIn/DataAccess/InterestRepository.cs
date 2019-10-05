@@ -17,6 +17,11 @@ namespace ClinkedIn.DataAccess
             new Interest("Basketball")
         };
 
+        public List<Interest> GetAll()
+        {
+            return _interest;
+        }
+
         public List<Interest> GetAllRepresentedInterests()
         {
             List<Guid> clinkerInterestIds = new ClinkerRepository().GetClinkerInterestIds();

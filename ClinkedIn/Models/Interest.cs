@@ -7,7 +7,7 @@ namespace ClinkedIn.Models
 {
     public class Interest
     {
-        public Guid Id { get; set; }
+        public Guid Id { get; }
         public string Name { get; set; }
 
         static string _guidPart = "af1b";
