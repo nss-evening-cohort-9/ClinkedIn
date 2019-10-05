@@ -13,6 +13,13 @@ namespace ClinkedIn.Controllers
     [ApiController]
     public class ClinkersController : ControllerBase
     {
+        // GET api/clinkers
+        [HttpGet]
+        public ActionResult<IEnumerable<Clinker>> GetAllClinkers()
+        {
+            return new ClinkerRepository().GetAll();
+        }
+
         // GET api/clinkers/services
         [HttpGet("services")]
         public ActionResult<IEnumerable<Service>> GetAvailableServices()
