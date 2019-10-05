@@ -62,5 +62,12 @@ namespace ClinkedIn.Controllers
 
             return Created($"api/clinkers/{clinkerThatGotCreated.Id}", clinkerThatGotCreated);
         }
+
+        // GET api/clinkers/clinkerId
+        [HttpGet("{clinkerId}")]
+        public ActionResult<Clinker> GetClinkerById(Guid clinkerId)
+        {
+            return new ClinkerRepository().GetById(clinkerId);
+        }
     }
 }
