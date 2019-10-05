@@ -103,5 +103,10 @@ namespace ClinkedIn.DataAccess
         {
             return new List<Guid> { GetRandom().Id, GetRandom().Id };
         }
+
+        public List<Service> GetAll()
+        {
+            return _services;
+        }
     }
 }

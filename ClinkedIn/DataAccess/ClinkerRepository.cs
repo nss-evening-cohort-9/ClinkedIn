@@ -1,8 +1,8 @@
-﻿using System;
+﻿using ClinkedIn.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using ClinkedIn.Models;
+using Microsoft.EntityFrameworkCore.Design;
 
 namespace ClinkedIn.DataAccess
 {
@@ -155,36 +155,76 @@ namespace ClinkedIn.DataAccess
         public Clinker AddInterest(Guid clinkerId, Guid interestId)
         {
             var clinkerToUpdate = _clinkers.First(clinker => clinker.Id == clinkerId);
+            var interests = new InterestRepository().GetAll();
+            var interestCheck = clinkerToUpdate.Interests.Contains(interestId);
 
-            clinkerToUpdate.Interests.Add(interestId);
-
+            if (!interestCheck)
+            {
+                foreach (var interest in interests)
+                {
+                    if (interest.Id == interestId)
+                    {
+                        clinkerToUpdate.Interests.Add(interestId);
+                    }
+                }
+            }
             return clinkerToUpdate;
         }
 
         public Clinker AddService(Guid clinkerId, Guid serviceId)
         {
             var clinkerToUpdate = _clinkers.First(clinker => clinker.Id == clinkerId);
+            var services = new ServiceRepository().GetAll();
+            var serviceCheck = clinkerToUpdate.Services.Contains(serviceId);
 
-            clinkerToUpdate.Services.Add(serviceId);
-
+            if (!serviceCheck)
+            {
+                foreach (var service in services)
+                {
+                    if (service.Id == serviceId)
+                    {
+                        clinkerToUpdate.Services.Add(serviceId);
+                    }
+                }
+            }
             return clinkerToUpdate;
         }
 
         public Clinker AddFriend(Guid clinkerId, Guid friendId)
         {
             var clinkerToUpdate = _clinkers.First(clinker => clinker.Id == clinkerId);
+            var enemyCheck = clinkerToUpdate.EnemiesList.Contains(friendId);
+            var friendCheck = clinkerToUpdate.FriendsList.Contains(friendId);
 
-            clinkerToUpdate.FriendsList.Add(friendId);
-
+            if (!enemyCheck && !friendCheck)
+            {
+                foreach (var clinker in _clinkers)
+                {
+                    if (clinker.Id == friendId)
+                    {
+                        clinkerToUpdate.FriendsList.Add(friendId);
+                    }
+                }
+            }
             return clinkerToUpdate;
         }
 
         public Clinker AddEnemy(Guid clinkerId, Guid enemyId)
         {
             var clinkerToUpdate = _clinkers.First(clinker => clinker.Id == clinkerId);
+            var enemyCheck = clinkerToUpdate.EnemiesList.Contains(enemyId);
+            var friendCheck = clinkerToUpdate.FriendsList.Contains(enemyId);
 
-            clinkerToUpdate.EnemiesList.Add(enemyId);
-
+            if (!enemyCheck && !friendCheck)
+            {
+                foreach (var clinker in _clinkers)
+                {
+                    if (clinker.Id == enemyId)
+                    {
+                        clinkerToUpdate.EnemiesList.Add(enemyId);
+                    }
+                }
+            }
             return clinkerToUpdate;
         }
 
@@ -199,28 +239,33 @@ namespace ClinkedIn.DataAccess
         {
             var clinkerToUpdate = _clinkers.First(clinker => clinker.Id == clinkerId);
 
-            clinkerToUpdate.Services.Remove(serviceId);
+            DeleteThis(clinkerToUpdate.Services, serviceId);
         }
 
         public void RemoveInterestFromInterestList(Guid clinkerId, Guid interestId)
         {
             var clinkerToUpdate = _clinkers.First(clinker => clinker.Id == clinkerId);
 
-            clinkerToUpdate.Interests.Remove(interestId);
+            DeleteThis(clinkerToUpdate.Interests, interestId);
         }
 
         public void RemoveFriendFromFriendList(Guid clinkerId, Guid friendId)
         {
             var clinkerToUpdate = _clinkers.First(clinker => clinker.Id == clinkerId);
 
-            clinkerToUpdate.FriendsList.Remove(friendId);
+            DeleteThis(clinkerToUpdate.FriendsList, friendId);
         }
 
         public void RemoveEnemyFromEnemyList(Guid clinkerId, Guid enemyId)
         {
             var clinkerToUpdate = _clinkers.First(clinker => clinker.Id == clinkerId);
 
-            clinkerToUpdate.EnemiesList.Remove(enemyId);
+            DeleteThis(clinkerToUpdate.EnemiesList, enemyId);
+        }
+
+        private void DeleteThis(List<Guid> typeOfList, Guid itemToDelete)
+        {
+            typeOfList.Remove(itemToDelete);
         }
     }
 }
