@@ -152,6 +152,12 @@ namespace ClinkedIn.DataAccess
             return clinkerServices;
         }
 
+        public Clinker Add(Clinker newClinker)
+        {
+            _clinkers.Add(newClinker);
+            return newClinker;
+        }
+
         public Clinker AddInterest(Guid clinkerId, Guid interestId)
         {
             var clinkerToUpdate = _clinkers.First(clinker => clinker.Id == clinkerId);
@@ -267,5 +273,6 @@ namespace ClinkedIn.DataAccess
         {
             typeOfList.Remove(itemToDelete);
         }
+
     }
 }

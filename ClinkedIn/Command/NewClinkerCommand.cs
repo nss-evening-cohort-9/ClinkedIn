@@ -7,5 +7,7 @@ namespace ClinkedIn.Command
 {
     public class NewClinkerCommand
     {
+        public string Name { get; set; }
+        public int InmateNum { get; set; }
     }
 }
