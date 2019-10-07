@@ -15,11 +15,11 @@ namespace ClinkedIn.Controllers
     [ApiController]
     public class ClinkersController : ControllerBase
     {
+        // GET api/clinkers
         [HttpGet]
         public ActionResult<IEnumerable<Clinker>> GetAllClinkers()
         {
-            var repo = new ClinkerRepository();
-            return repo.GetAll();
+            return new ClinkerRepository().GetAll();
         }
 
         // GET api/clinkers/services
@@ -61,16 +61,7 @@ namespace ClinkedIn.Controllers
         [HttpPost]
         public IActionResult CreateClinker(NewClinkerCommand newClinkerCommand)
         {
-            Clinker newClinker = new Clinker
-            {
-                Id = Guid.NewGuid(),
-                Name = newClinkerCommand.Name,
-                InmateNum = newClinkerCommand.InmateNum,
-                FriendsList = new List<Guid>(),
-                EnemiesList = new List<Guid>(),
-                Services = new List<Guid>(),
-                Interests = new List<Guid>(),
-            };
+            Clinker newClinker = new Clinker(newClinkerCommand.Name, newClinkerCommand.InmateNum);
 
             ClinkerRepository repo = new ClinkerRepository();
             var clinkerThatGotCreated = repo.Add(newClinker);

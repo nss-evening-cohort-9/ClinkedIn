@@ -10,31 +10,11 @@ namespace ClinkedIn.DataAccess
     {
         static List<Interest> _interest = new List<Interest>
         {
-            new Interest
-            {
-                Id = Guid.NewGuid(),
-                Name = "Cigarette Making"
-            },
-            new Interest
-            {
-                Id = Guid.NewGuid(),
-                Name = "Polishing"
-            },
-            new Interest
-            {
-                Id = Guid.NewGuid(),
-                Name = "Cooking"
-            },
-            new Interest
-            {
-                Id = Guid.NewGuid(),
-                Name = "Workouts"
-            },
-            new Interest
-            {
-                Id = Guid.NewGuid(),
-                Name = "Basketball"
-            }
+            new Interest("Cigarette Making"),
+            new Interest("Polishing"),
+            new Interest("Cooking"),
+            new Interest("Workouts"),
+            new Interest("Basketball")
         };
 
         public List<Interest> GetAll()
